@@ -1,1 +1,8 @@
-<p>task-list works!</p>
+<p *ngIf="!toDoTasks.length">No tasks to do!</p>
+
+<ul *ngIf="toDoTasks.length">
+  <li *ngFor="let task of toDoTasks">
+    <strong>{{ task.title }}</strong>
+    <span *ngIf="task.description"> - {{ task.description }}</span>
+  </li>
+</ul>
