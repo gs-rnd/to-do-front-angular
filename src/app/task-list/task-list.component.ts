@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Task } from './task.interface';
+import { TASKS } from '../tasks.mock';
 
 @Component({
   selector: 'app-task-list',
@@ -9,14 +10,12 @@ import { Task } from './task.interface';
 })
 export class TaskListComponent implements OnInit {
 
-  toDoTasks: Task[] = [
-    { id: 1, title: 'Make To Do App', description: 'using Angular create a SPA for the front end.' },
-    { id: 2, title: 'Create component to display individual tasks' }
-  ];
+  toDoTasks: Task[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
+    this.toDoTasks = TASKS;
   }
 
 }
