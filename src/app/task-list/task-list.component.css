@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  padding-top: 1em;
+}
+
+.empty-list {
+  background-color: hsl(168, 100%, 80%);
+  padding: 0.5em;
+  margin-bottom: 1em;
+  border-radius: 0.5em;
+  border-style: solid;
+  border-color: hsl(168, 100%, 20%);
+  border-width: 0.15em;
+}

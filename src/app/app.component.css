@@ -1,3 +1,4 @@
-.container {
-  background-color: hsl(115, 100%, 90%);
+:host {
+  display: block;
+  background-color: hsl(168, 100%, 2%);
 }
