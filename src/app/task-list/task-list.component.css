@@ -1,6 +1,6 @@
 :host {
   display: block;
-  padding-top: 1em;
+  padding: 1em 0;
 }
 
 .empty-list {

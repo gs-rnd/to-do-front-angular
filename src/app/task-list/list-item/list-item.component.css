@@ -9,6 +9,10 @@
   overflow: hidden;
 }
 
+:host:last-of-type {
+  margin-bottom: 0;
+}
+
 .task-title {
   background-color: hsl(168, 100%, 15%);
   color: hsl(168, 100%, 95%);
