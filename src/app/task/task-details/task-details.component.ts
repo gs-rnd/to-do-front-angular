@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Task } from 'src/app/task-list/task.interface';
-import { TASKS } from 'src/app/tasks.mock';
+import { DataService } from 'src/app/core/data.service';
+
+import { Task } from 'src/app/shared/task.interface';
 
 @Component({
   selector: 'app-task-details',
@@ -13,11 +14,14 @@ export class TaskDetailsComponent implements OnInit {
 
   task: Task;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute,
+              private dataService: DataService) {}
 
   ngOnInit(): void {
     let id = Number(this.route.snapshot.paramMap.get('id'));
-    this.task = TASKS.filter(t => t.id === id)[0];
+    this.dataService.getTask(id).subscribe(task => {
+      this.task = task;
+    })
   }
 
 }
