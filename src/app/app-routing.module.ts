@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { TaskListComponent } from './task-list/task-list.component';
-
 const routes: Routes = [
-  { path: '', component: TaskListComponent }
+  { path: '', pathMatch: 'full', redirectTo: 'todo' },
+  { path: '**', pathMatch: 'full', redirectTo: 'todo' }
 ];
 
 @NgModule({
