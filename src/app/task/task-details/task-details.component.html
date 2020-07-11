@@ -1,1 +1,9 @@
-<p>task-details works!</p>
+<div *ngIf="!task">
+  Task not found!
+</div>
+
+<div *ngIf="task">
+  <h2 class="task-title">{{ task.title }}</h2>
+  <h3>Description</h3>
+  <p>{{ task.description }}</p>
+</div>
