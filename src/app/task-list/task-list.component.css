@@ -12,3 +12,8 @@
   border-color: hsl(168, 100%, 20%);
   border-width: 0.15em;
 }
+
+.selected {
+  border-color: hsl(8, 100%, 50%);
+  box-shadow: 0 0 0.4em 0.2em hsl(8, 100%, 50%);
+}

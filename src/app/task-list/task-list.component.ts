@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Task } from './task.interface';
 import { TASKS } from '../tasks.mock';
@@ -11,11 +12,26 @@ import { TASKS } from '../tasks.mock';
 export class TaskListComponent implements OnInit {
 
   toDoTasks: Task[] = [];
+  selectedTask: Task;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.toDoTasks = TASKS;
+  }
+
+  onClick(task: Task): void {
+    if (this.selectedTask && this.selectedTask.id === task.id) {
+      this.router.navigate(['/task', task.id]);
+    }
+    this.selectedTask = task;
+  }
+
+  isSelected(task: Task): boolean {
+    if (!this.selectedTask) {
+      return false;
+    }
+    return task.id === this.selectedTask.id;
   }
 
 }
