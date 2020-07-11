@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Task } from 'src/app/task-list/task.interface';
+import { Task } from 'src/app/shared/task.interface';
 import { TASKS } from 'src/app/tasks.mock';
 
 @Component({

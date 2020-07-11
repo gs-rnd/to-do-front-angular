@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Task } from '../task.interface';
+import { Task } from '../../shared/task.interface';
 
 @Component({
   selector: 'app-list-item',
