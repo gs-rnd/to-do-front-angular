@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { DataService } from '../core/data.service';
+
 import { Task } from '../shared/task.interface';
-import { TASKS } from '../tasks.mock';
 
 @Component({
   selector: 'app-task-list',
@@ -14,10 +15,13 @@ export class TaskListComponent implements OnInit {
   toDoTasks: Task[] = [];
   selectedTask: Task;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private dataService: DataService) {}
 
   ngOnInit(): void {
-    this.toDoTasks = TASKS;
+    this.dataService.getTasks().subscribe((tasks: Task[]) => {
+      this.toDoTasks = tasks;
+    });
   }
 
   onClick(task: Task): void {
