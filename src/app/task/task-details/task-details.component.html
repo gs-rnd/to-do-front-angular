@@ -1,6 +1,6 @@
-<div *ngIf="!task">
+<h2 *ngIf="!task" class="task-not-found">
   Task not found!
-</div>
+</h2>
 
 <div *ngIf="task">
   <h2 class="task-title">{{ task.title }}</h2>

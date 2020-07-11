@@ -38,3 +38,11 @@ p {
   padding: 0.25em 0.5em;
   margin: 0; 
 }
+
+.task-not-found {
+  background-color: hsl(168, 100%, 15%);
+  color: hsl(168, 100%, 95%);
+  min-height: 1.7em;
+  padding: 0.25em;
+  margin: 0;
+}
