@@ -1,1 +1,22 @@
-<p>task-form works!</p>
+<form class="my-3" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input id="title" class="form-control" type="text"
+            formControlName="title"
+            [class.is-invalid]="title.invalid && (title.dirty || title.touched)"
+            required/>
+    <p *ngIf="title.errors?.required && (title.dirty || title.touched)"
+        class="invalid-feedback">
+      Title is required
+    </p>
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea id="description" class="form-control"
+              formControlName="description"></textarea>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-success" type="submit"
+            [disabled]="form.invalid">Save</button>
+  </div>
+</form>
