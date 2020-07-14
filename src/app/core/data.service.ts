@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 import { Task } from '../shared/task.interface';
 
@@ -27,13 +27,8 @@ export class DataService {
   }
 
   getTask(id: number): Observable<Task> {
-    return this.http.get<Task[]>(this.tasksUrl)
+    return this.http.get<Task>(`${this.tasksUrl}/${id}`)
       .pipe(
-        map((tasks: Task[]) => 
-          tasks.reduce((a, b) => {
-            return (a === null && b.id === id) ? b : a;
-          }, null)
-        ),
         catchError(this.handleError<Task>('getTask', null))
       )
   }
