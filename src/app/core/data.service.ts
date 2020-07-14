@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -12,7 +12,10 @@ import { Task } from '../shared/task.interface';
 })
 export class DataService {
 
-  private tasksUrl: string = 'assets/tasks.mock.json'
+  private tasksUrl: string = 'assets/tasks.mock.json';
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(private http: HttpClient) {}
 
@@ -33,6 +36,13 @@ export class DataService {
         ),
         catchError(this.handleError<Task>('getTask', null))
       )
+  }
+
+  addTask(task: Task): Observable<Task> {
+    return this.http.post<Task>('http://localhost:8080/tasks', task, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<Task>('addTask'))
+      );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
