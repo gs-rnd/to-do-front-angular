@@ -38,4 +38,8 @@ export class TaskListComponent implements OnInit {
     return task.id === this.selectedTask.id;
   }
 
+  addTaskButton():void {
+    this.router.navigate(['task/new']);
+  }
+
 }
