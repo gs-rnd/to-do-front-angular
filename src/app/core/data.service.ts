@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 import { Task } from '../shared/task.interface';
 
@@ -12,7 +12,7 @@ import { Task } from '../shared/task.interface';
 })
 export class DataService {
 
-  private tasksUrl: string = 'assets/tasks.mock.json';
+  private tasksUrl: string = 'http://localhost:8080/tasks';
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -27,21 +27,16 @@ export class DataService {
   }
 
   getTask(id: number): Observable<Task> {
-    return this.http.get<Task[]>(this.tasksUrl)
+    return this.http.get<Task>(`${this.tasksUrl}/${id}`)
       .pipe(
-        map((tasks: Task[]) => 
-          tasks.reduce((a, b) => {
-            return (a === null && b.id === id) ? b : a;
-          }, null)
-        ),
         catchError(this.handleError<Task>('getTask', null))
       )
   }
 
   addTask(task: Task): Observable<Task> {
-    return this.http.post<Task>('http://localhost:8080/tasks', task, this.httpOptions)
+    return this.http.post<Task>(this.tasksUrl, task, this.httpOptions)
       .pipe(
-        catchError(this.handleError<Task>('addTask'))
+        catchError(this.handleError<Task>('addTask', null))
       );
   }
 
