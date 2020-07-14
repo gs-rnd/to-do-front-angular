@@ -17,6 +17,6 @@
   </div>
   <div class="form-group">
     <button class="btn btn-success" type="submit"
-            [disabled]="form.invalid">Save</button>
+            [disabled]="form.invalid || !form.dirty">Save</button>
   </div>
 </form>

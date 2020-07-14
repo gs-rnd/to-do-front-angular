@@ -12,14 +12,16 @@ import { DataService } from 'src/app/core/data.service';
 export class TaskFormComponent implements OnInit {
 
   form: FormGroup;
+  private task: Task;
 
   constructor(private formBuilder: FormBuilder,
               private dataService: DataService) {}
 
   ngOnInit(): void {
+    this.task = history.state.task ? history.state.task : { title: '', description: '' };
     this.form = this.formBuilder.group({
-      'title': ['', Validators.required],
-      'description': ['']
+      'title': [this.task.title, Validators.required],
+      'description': [this.task.description]
     });
   }
 
