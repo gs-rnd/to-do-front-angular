@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TaskDetailsComponent } from './task-details/task-details.component';
-import { TaskFormComponent } from './task-form/task-form.component';
+import { CreateTaskComponent } from './create-task/create-task.component';
+import { EditTaskComponent } from './edit-task/edit-task.component';
 
 const routes: Routes = [
-  { path: 'task/new', component: TaskFormComponent },
+  { path: 'task/new', component: CreateTaskComponent },
   { path: 'task/:id', component: TaskDetailsComponent },
-  { path: 'task/:id/edit', component: TaskFormComponent }
+  { path: 'task/:id/edit', component: EditTaskComponent }
 ];
 
 @NgModule({
