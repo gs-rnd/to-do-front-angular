@@ -12,7 +12,7 @@ import { Task } from '../shared/task.interface';
 })
 export class DataService {
 
-  private tasksUrl: string = 'assets/tasks.mock.json';
+  private tasksUrl: string = 'http://localhost:8080/tasks';
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -39,9 +39,9 @@ export class DataService {
   }
 
   addTask(task: Task): Observable<Task> {
-    return this.http.post<Task>('http://localhost:8080/tasks', task, this.httpOptions)
+    return this.http.post<Task>(this.tasksUrl, task, this.httpOptions)
       .pipe(
-        catchError(this.handleError<Task>('addTask'))
+        catchError(this.handleError<Task>('addTask', null))
       );
   }
 
