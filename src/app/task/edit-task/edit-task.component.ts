@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Task } from '../../shared/task.interface';
 import { DataService } from 'src/app/core/data.service';
@@ -14,6 +14,7 @@ export class EditTaskComponent implements OnInit {
   task: Task;
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private dataService: DataService) { }
 
   ngOnInit(): void {
@@ -26,8 +27,11 @@ export class EditTaskComponent implements OnInit {
   updateTask(task: Task): void {
     task.id = this.task.id;
     this.dataService.updateTask(task).subscribe(
-      task => console.log('Successfully updated task: ', task)
-    )
+      task => {
+        console.log('Successfully updated task: ', task);
+        this.router.navigate(this.route.snapshot.url.slice(0,-1).map(seg => seg.path));
+      }
+    );
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Task } from 'src/app/shared/task.interface';
 import { DataService } from 'src/app/core/data.service';
@@ -12,14 +13,18 @@ export class CreateTaskComponent implements OnInit {
 
   private task: Task;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService,
+              private router: Router) { }
 
   ngOnInit(): void {
   }
 
   addTask(task: Task): void {
     this.dataService.addTask(task).subscribe(
-      task => console.log('Successfully added task:', task)
+      task => {
+        console.log('Successfully added task:', task);
+        this.router.navigate(['todo']);
+      }
     );
   }
 
