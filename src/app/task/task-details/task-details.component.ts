@@ -31,7 +31,9 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   deleteTask(): void {
-    this.dataService.deleteTask(this.task).subscribe();
+    this.dataService.deleteTask(this.task).subscribe(
+      _ => this.router.navigate(['todo'])
+    );
   }
 
 }
