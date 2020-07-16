@@ -43,7 +43,7 @@ export class DataService {
   updateTask(task: Task): Observable<Task> {
     return this.http.put<Task>(`${this.tasksUrl}/${task.id}`, task, this.httpOptions)
       .pipe(
-        catchError(this.handleError<Task>('updateTask', null))
+        // catchError(this.handleError<Task>('updateTask', null))
       );
   }
 

@@ -30,6 +30,9 @@ export class EditTaskComponent implements OnInit {
       task => {
         console.log('Successfully updated task: ', task);
         this.router.navigate(this.route.snapshot.url.slice(0,-1).map(seg => seg.path));
+      },
+      error => {
+        console.error(error);
       }
     );
   }
