@@ -47,6 +47,13 @@ export class DataService {
       );
   }
 
+  deleteTask(task: Task): Observable<Task> {
+    return this.http.delete<Task>(`${this.tasksUrl}/${task.id}`, this.httpOptions)
+      .pipe (
+        catchError(this.handleError<Task>('deleteTask'))
+      );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
