@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { DataService } from 'src/app/core/data.service';
 
@@ -15,6 +15,7 @@ export class TaskDetailsComponent implements OnInit {
   task: Task;
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private dataService: DataService) {}
 
   ngOnInit(): void {
@@ -22,6 +23,11 @@ export class TaskDetailsComponent implements OnInit {
     this.dataService.getTask(id).subscribe(task => {
       this.task = task;
     })
+  }
+
+  editTask(): void {
+    this.router.navigate(['task', this.task.id, 'edit'],
+      {state: {task: this.task}});
   }
 
 }

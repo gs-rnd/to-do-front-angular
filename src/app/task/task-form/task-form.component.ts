@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Task } from '../../shared/task.interface';
-import { DataService } from 'src/app/core/data.service';
 
 @Component({
   selector: 'app-task-form',
@@ -13,22 +12,34 @@ export class TaskFormComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,
-              private dataService: DataService) {}
+  private _task: Task;
+  @Input() set task(task: Task) {
+    if (task) {
+      this._task = task;
+      this.form.setValue({
+        title: task.title,
+        description: task.description
+      });
+    }
+  }
+  get task(): Task { return this._task; }
 
-  ngOnInit(): void {
+  @Output() submitTask: EventEmitter<Task> = new EventEmitter<Task>();
+
+  constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
       'title': ['', Validators.required],
       'description': ['']
     });
   }
 
+  ngOnInit(): void {
+  }
+
   get title() { return this.form.get('title'); }
 
   onSubmit(task: Task): void {
-    this.dataService.addTask(task).subscribe(
-      task => console.log('Successfully added task:', task)
-    );
+    this.submitTask.emit(task);
   }
 
 }
