@@ -30,4 +30,10 @@ export class TaskDetailsComponent implements OnInit {
       {state: {task: this.task}});
   }
 
+  deleteTask(): void {
+    this.dataService.deleteTask(this.task).subscribe(
+      _ => this.router.navigate(['todo'])
+    );
+  }
+
 }
