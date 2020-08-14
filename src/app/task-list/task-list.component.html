@@ -1,12 +1,19 @@
-<h5 *ngIf="!toDoTasks.length" class="empty-list">No tasks to do!</h5>
+<div *ngIf="!toDoTasks.length" class="d-flex justify-content-center">
+  <h5 class="mt-3">No tasks to do!</h5>
+</div>
 
-<div *ngIf="toDoTasks.length">
+<div *ngIf="toDoTasks.length" class="d-flex flex-column">
   <app-list-item *ngFor="let task of toDoTasks" 
                   [task]="task"
                   (click)="onClick(task)"
-                  [class.selected]="isSelected(task)"></app-list-item>
+                  class="m-1 p-1 border rounded-lg"
+                  [ngClass]="{
+                    'border-danger': isSelected(task),
+                    'border-secondary': !isSelected(task)
+                  }">
+  </app-list-item>
 </div>
 
-<div class="center">
-  <button (click)="addTaskButton()" class="add-button">Add New Task</button>
+<div class="d-flex justify-content-center">
+  <button class="btn btn-success" (click)="addTaskButton()">Add New Task</button>
 </div>
