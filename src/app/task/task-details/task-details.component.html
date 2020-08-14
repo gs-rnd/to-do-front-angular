@@ -1,14 +1,15 @@
-<h2 *ngIf="!task" class="task-not-found">
-  Task not found!
-</h2>
+<div *ngIf="!task" class="d-flex justify-content-center">
+  <h5 class="mt-3">Task not found!</h5>
+</div>
+
 
 <div *ngIf="task">
-  <h2 class="task-title">{{ task.title }}</h2>
-  <h3>Description</h3>
+  <h2>{{ task.title }}</h2>
+  <h5 class="mb-1">Description:</h5>
   <p>{{ task.description }}</p>
 
   <div class="d-flex justify-content-center">
-    <button class="btn btn-primary mr-auto" (click)="editTask()">Edit</button>
+    <button class="btn btn-primary mr-3" (click)="editTask()">Edit</button>
     <button class="btn btn-danger" (click)="deleteTask()">Delete</button>
   </div>
 </div>
