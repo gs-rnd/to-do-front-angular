@@ -7,10 +7,10 @@
             required>
     <div *ngIf="username.invalid && (username.dirty || username.touched)"
           class="invalid-feedback">
-      <div *ngIf="username.errors.required">
-        Name is required.
+      <div *ngIf="username.errors.required || username.errors.NotBlank">
+        Username is required.
       </div>
-      <div *ngIf="username.errors.exists">
+      <div *ngIf="username.errors.Exists">
         Username already exists.
       </div>
     </div>
@@ -23,13 +23,13 @@
             required>
     <div *ngIf="email.invalid && (email.dirty || email.touched)"
           class="invalid-feedback">
-      <div *ngIf="email.errors.required">
+      <div *ngIf="email.errors.required || email.errors.NotBlank">
         Email is required.
       </div>
-      <div *ngIf="email.errors.email">
+      <div *ngIf="email.errors.email || email.errors.Email">
         Invalid email format.
       </div>
-      <div *ngIf="email.errors.exists">
+      <div *ngIf="email.errors.Exists">
         Email already registered.
       </div>
     </div>
@@ -42,7 +42,7 @@
             required>
     <div *ngIf="password.invalid && (password.dirty || password.touched)"
           class="invalid-feedback">
-      <div *ngIf="password.errors.required">
+      <div *ngIf="password.errors.required || password.errors.NotBlank">
         Password is required.
       </div>
     </div>

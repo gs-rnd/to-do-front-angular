@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/core/auth.service';
 import { MessageResponse } from 'src/app/shared/message-response.interface';
+import { FormFieldError } from 'src/app/shared/form-field-error.interface';
 
 import { passwordsMatchValidator } from './passwords-match-validator.directive';
+
 
 
 @Component({
@@ -26,25 +29,36 @@ export class RegisterComponent implements OnInit {
   get password() { return this.registerForm.get('password'); }
 
   constructor(private formBuilder: FormBuilder,
-              private authService: AuthService) {}
+              private authService: AuthService,
+              private router: Router) {}
 
   ngOnInit(): void {
   }
 
   onSubmit(): void {
-    console.log("User from submitted form: ", this.registerForm.value);
+    this.username.setValue(this.username.value.trim());
+    this.email.setValue(this.email.value.trim());
+    this.password.setValue(this.password.value.trim());
     if (this.registerForm.valid) {
       this.authService.register(this.registerForm.value).subscribe(
         (user: MessageResponse): void => {
-          console.log("Success POST message:", user.message);
+          console.log(user.message);
+          this.router.navigate(['login']);
         },
-        (error: any): void => {
-          console.log("Error POST message:", error);
+        (errors: FormFieldError[] | string): void => {
+          if (typeof errors === 'string') {
+            console.log(errors);
+          } else {
+            for (const error of errors) {
+              let validationError: ValidationErrors = {};
+              validationError[error.code] = error.message;
+              this.registerForm.get(error.field).setErrors(validationError);
+            }
+          }
         }
       );
-    } else {
-      this.registerForm.markAllAsTouched();
     }
+    this.registerForm.markAllAsTouched();
   }
 
 }
