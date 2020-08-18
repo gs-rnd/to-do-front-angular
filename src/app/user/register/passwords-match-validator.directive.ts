@@ -12,7 +12,7 @@ export const passwordsMatchValidator: ValidatorFn =
     const pass: AbstractControl = control.get('password');
     const verify: AbstractControl = control.get('verifyPassword');
     return pass && verify && pass.value !== verify.value ?
-      { passwordsMatch: false } :
+      { passwordsMatch: true } :
       null;
   }
 

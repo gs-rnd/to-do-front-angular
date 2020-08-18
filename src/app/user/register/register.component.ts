@@ -19,7 +19,11 @@ export class RegisterComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
     verifyPassword: ['']
-  }, { validators: passwordsMatchValidator });
+  }, { validators: passwordsMatchValidator, updateOn: 'submit' });
+
+  get username() { return this.registerForm.get('username'); }
+  get email() { return this.registerForm.get('email'); }
+  get password() { return this.registerForm.get('password'); }
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService) {}
@@ -29,14 +33,18 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     console.log("User from submitted form: ", this.registerForm.value);
-    this.authService.register(this.registerForm.value).subscribe(
-      (user: MessageResponse): void => {
-        console.log("Success POST message:", user.message);
-      },
-      (error: any): void => {
-        console.log("Error POST message:", error);
-      }
-    );
+    if (this.registerForm.valid) {
+      this.authService.register(this.registerForm.value).subscribe(
+        (user: MessageResponse): void => {
+          console.log("Success POST message:", user.message);
+        },
+        (error: any): void => {
+          console.log("Error POST message:", error);
+        }
+      );
+    } else {
+      this.registerForm.markAllAsTouched();
+    }
   }
 
 }
