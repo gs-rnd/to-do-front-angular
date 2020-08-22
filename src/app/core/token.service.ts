@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { JwtResponse } from '../shared/jwt-response.interface';
 
 const TOKEN_KEY = "auth-token";
 const USER_KEY = "auth-user";
@@ -23,12 +24,12 @@ export class TokenService {
     return window.sessionStorage.getItem(TOKEN_KEY);
   }
 
-  public saveUser(user): void {
+  public saveUser(user: JwtResponse): void {
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
-  public getUser(): any {
+  public getUser(): JwtResponse {
     return JSON.parse(window.sessionStorage.getItem(USER_KEY));
   }
 

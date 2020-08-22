@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
             console.log(errors);
           } else {
             for (const error of errors) {
-              let validationError: ValidationErrors = {};
+              const validationError: ValidationErrors = {};
               validationError[error.code] = error.message;
               this.registerForm.get(error.field).setErrors(validationError);
             }
