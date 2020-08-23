@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, Subject, BehaviorSubject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { User } from '../user/user.interface';
@@ -18,6 +18,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthService {
+
+  isLoggedIn: Subject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {}
 
@@ -55,6 +57,14 @@ export class AuthService {
     }
     // Return an observable with a user-facing error message.
     return throwError('Something bad happened; please try again later.');
+  }
+
+  public loginSuccess(): void {
+    this.isLoggedIn.next(true);
+  }
+
+  public logout(): void {
+    this.isLoggedIn.next(false);
   }
 
 }

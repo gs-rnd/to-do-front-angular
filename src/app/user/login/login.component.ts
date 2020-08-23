@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
           // console.log(atob(data.accessToken.split('.')[1]));
           this.tokenService.saveToken(data.accessToken);
           this.tokenService.saveUser(data);
+          this.authService.loginSuccess();
           this.router.navigate(['todo'])
         },
         (errors: FormFieldError[] | string): void => {
